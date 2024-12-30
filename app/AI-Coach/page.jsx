@@ -3,8 +3,6 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 
 // Dynamically import a chart library like Chart.js or Recharts
-const DynamicLineChart = dynamic(() => import("../components/LineChart"), { ssr: false });
-
 export default function AICoach() {
   const [videoFile, setVideoFile] = useState(null);
   const [analysisData, setAnalysisData] = useState(null);
