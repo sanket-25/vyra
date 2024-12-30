@@ -1,101 +1,142 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { FaGooglePlay, FaAppStore, FaGlobe } from "react-icons/fa"; // Import icons
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [isAnimating, setIsAnimating] = useState(false);
+  const router = useRouter();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    setIsAnimating(true); // Trigger animation after the component is mounted
+  }, []);
+
+  return (
+    <div className="relative w-full min-h-screen">
+      {/* Grid Background */}
+      <div
+        className="grid grid-cols-4 gap-0 min-h-screen"
+        style={{ gridTemplateRows: "repeat(auto-fill, minmax(100px, 1fr))" }}
+      >
+        {Array.from({ length: 40 }).map((_, index) => (
+          <div
+            key={index}
+            className={`border-r border-b border-[#9e9e9e] ${index % 4 === 3 ? "border-r-0" : ""} ${
+              index >= 96 ? "border-b-0" : ""
+            } aspect-square`}
+          />
+        ))}
+      </div>
+
+      {/* Text Overlay */}
+      <div
+        className={`absolute inset-0 flex flex-col justify-start -mt-10 top-[20vh] ${
+          isAnimating ? "opacity-100 transition-opacity duration-1000" : "opacity-0"
+        }`}
+      >
+        <h1
+          className="text-[7vw] font-bold leading-none tracking-wider text-transparent mt-8 ml-10 text-left"
+          style={{
+            WebkitTextStroke: "2px var(--stroke-color)",
+            textStroke: "2px var(--stroke-color)",
+          }}
+        >
+          <p className="font-claven">
+            EXPLORE THE <br />
+            RACE WITHIN <br />
+            YOU!
+          </p>
+        </h1>
+      </div>
+
+      {/* Buttons */}
+      <div
+        className={`absolute inset-x-0 flex items-center justify-center space-x-40 mt-[40vh] ${
+          isAnimating ? "opacity-100 transition-opacity duration-1000" : "opacity-0"
+        }`}
+        style={{ top: "40vh", height: "30vh" }}
+      >
+        <button
+          className="bg-red-600 text-black dark:text-white px-6 py-2 flex items-center space-x-2 hover:bg-[#e4e4e4] hover:text-black hover:border-black border-2"
+          style={{
+            clipPath:
+              "polygon(10% 0%, 99% 0%, 100% 70%, 100% 70%, 90% 100%, 1% 100%, 0% 30%)",
+            borderRadius: "5px",
+            border: "1px solid red",
+          }}
+          onClick={() => router.push("/page1")}
+        >
+          <FaGooglePlay size={20} />
+          <span>Play Store</span>
+        </button>
+        <button
+          className="bg-red-600 text-black dark:text-white px-6 py-2 flex items-center space-x-2 hover:bg-[#e4e4e4] hover:text-black hover:border-black border-2"
+          style={{
+            clipPath:
+              "polygon(10% 0%, 99% 0%, 100% 70%, 100% 70%, 90% 100%, 1% 100%, 0% 30%)",
+            borderRadius: "5px",
+            border: "1px solid red",
+          }}
+          onClick={() => router.push("/page2")}
+        >
+          <FaAppStore size={20} />
+          <span>App Store</span>
+        </button>
+        <button
+          className="bg-red-600 text-black dark:text-white px-6 py-2 flex items-center space-x-2 hover:bg-[#e4e4e4] hover:text-black hover:border-black border-2"
+          style={{
+            clipPath:
+              "polygon(10% 0%, 99% 0%, 100% 70%, 100% 70%, 90% 100%, 1% 100%, 0% 30%)",
+            borderRadius: "5px",
+            border: "1px solid red",
+          }}
+          onClick={() => router.push("/page3")}
+        >
+          <FaGlobe size={20} />
+          <span>Web App</span>
+        </button>
+      </div>
+
+      {/* Videos */}
+      <div
+        className={`absolute inset-x-0 bottom-[20vh] flex flex-col items-center space-y-4 ${
+          isAnimating ? "opacity-100 transition-opacity duration-1000" : "opacity-0"
+        }`}
+      >
+        <div className="flex justify-center space-x-4 w-full px-4">
+          <video
+            src="assets/start.mp4"
+            autoPlay
+            loop
+            muted
+            className="w-[50%] aspect-square object-cover rounded-lg shadow"
+          />
+          <video
+            src="assets/start.mp4"
+            autoPlay
+            loop
+            muted
+            className="w-[50%] aspect-square object-cover rounded-lg shadow"
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+        <video
+          src="assets/analysis.mp4"
+          autoPlay
+          loop
+          muted
+          className="w-full aspect-video object-cover rounded-lg shadow px-4"
+        />
+        <h1
+          className="text-[23vw] font-bold leading-none tracking-wider text-black dark:text-white mt-30"
+          style={{
+            WebkitTextStroke: "1px #1a1a1a",
+            textStroke: "1px #1a1a1a",
+          }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <div className="font-claven ">V Y R A</div>
+        </h1>
+      </div>
     </div>
   );
 }

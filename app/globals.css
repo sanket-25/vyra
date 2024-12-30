@@ -2,20 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
+@font-face {
+  font-family: 'Claven';
+  src: url('/public/fonts/claven/Claven.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Salveation';
+  src: url('/public/fonts/salveation_serif/Salveation\ Serif.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Salveation-1';
+  src: url('/public/fonts/salveation_serif/Salveation\ Serif.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Samantha';
+  src: url('/public/fonts/samantha_3/Samantha\ Demo.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'sanshiro';
+  src: url('/public/fonts/sanshiro/SanshiroDemo/SanshiroDemo-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --stroke-color: #1a1a1a; 
   }
 }
+
+
+
+/* Clip the bottom left and right corners of the navbar */
+.navbar {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 78%, 98% 100%, 2% 100%, 0% 80%);
+  background-color:  #ededed;
+  
+}
+
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-family: LabsAmiga, sans-serif;
 }
+
+
+
+/* Dark mode styles */
+.dark body {
+  background-color: #1a202c;
+  color: #ffffff;
+  --stroke-color: #ffffff;
+  
+}
+
+
+
+/* CSS for the cuts on the bottom left and bottom right */
+/* .clip-cut-corners {
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 15% 100%, 0% 85%);
+} */
