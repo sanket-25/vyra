@@ -48,7 +48,7 @@ export default function Home() {
         className={`absolute inset-0 flex flex-row justify-start -mt-10 top-[20vh] ${isAnimating ? "opacity-100 transition-opacity duration-1000" : "opacity-0"
           }`}
       >
-        <div className="w-full">
+        <div className="w-full h-100">
           <h1
             className="text-[7vw] font-bold leading-none tracking-wider mt-8 ml-10 text-left text-black"
           >
@@ -59,7 +59,7 @@ export default function Home() {
         </div>
         <div>
           <video
-            src="/videos/earth.mp4"
+            src="/videos/start2.mp4"
             autoPlay
             loop
             muted

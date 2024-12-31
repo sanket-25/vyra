@@ -63,9 +63,7 @@
 
 /* Clip the bottom left and right corners of the navbar */
 .navbar {
-  clip-path: polygon(0% 0%, 100% 0%, 100% 78%, 98% 100%, 2% 100%, 0% 80%);
-  background-color:  #ededed;
-  
+  clip-path: polygon(0% 0%, 100% 0%, 100% 78%, 98% 100%, 2% 100%, 0% 80%);  
 }
 
 

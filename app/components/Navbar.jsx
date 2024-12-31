@@ -7,18 +7,36 @@ import { User } from 'lucide-react';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const loggedInStatus = localStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(loggedInStatus);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-[#ededed] text-gray-800 px-4 py-6 border-b border-[#9e9e9e] z-50 navbar">
+    <nav
+      className={`fixed top-0 left-0 right-0 px-4 py-6 border-b z-50 navbar transition-colors duration-300 ${
+        isScrolled ? 'bg-gray-800 text-white border-gray-700' : 'bg-[#ededed] text-gray-800 border-[#9e9e9e]'
+      }`}
+    >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="text-lg font-bold flex-shrink-0">
-          <Link href="/" className="hover:text-gray-600">
+          <Link href="/" className="hover:text-gray-400">
             VYRA
           </Link>
         </div>
@@ -26,7 +44,7 @@ const Navbar = () => {
         {/* Hamburger Menu for Mobile */}
         <div className="md:hidden flex-shrink-0 z-99">
           <button
-            className="text-gray-800 hover:text-gray-600 focus:outline-none"
+            className="hover:text-gray-400 focus:outline-none"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <svg
@@ -47,34 +65,38 @@ const Navbar = () => {
         </div>
 
         {/* Links */}
-        <ul className={`absolute md:relative top-16 md:top-auto left-0 right-0 md:flex md:items-center md:space-x-4 bg-[#ededed] md:bg-transparent p-4 md:p-0 z-40 transform ${isMenuOpen ? 'block' : 'hidden'} md:block`}>
-          <li className="md:inline">
-            <Link href="/about" className="block md:inline text-gray-800 hover:text-gray-600">
+        <ul
+          className={`absolute md:relative top-16 md:top-auto left-0 right-0 md:flex md:items-center md:space-x-4 bg-[#ededed] md:bg-transparent p-4 md:p-0 z-40 transform ${
+            isMenuOpen ? 'block' : 'hidden'
+          } md:block`}
+        >
+          <li>
+            <Link href="/about" className="block md:inline hover:text-gray-400">
               About
             </Link>
           </li>
-          <li className="md:inline">
-            <Link href="/Events" className="block md:inline text-gray-800 hover:text-gray-600">
+          <li>
+            <Link href="/Events" className="block md:inline hover:text-gray-400">
               Events
             </Link>
           </li>
-          <li className="md:inline">
-            <Link href="/Clubs" className="block md:inline text-gray-800 hover:text-gray-600">
+          <li>
+            <Link href="/Clubs" className="block md:inline hover:text-gray-400">
               Clubs
             </Link>
           </li>
-          <li className="md:inline">
-            <Link href="/AI-Coach" className="block md:inline text-gray-800 hover:text-gray-600">
+          <li>
+            <Link href="/AI-Coach" className="block md:inline hover:text-gray-400">
               AI Coach
             </Link>
           </li>
-          <li className="md:inline">
-            <Link href="/AI-Analysis" className="block md:inline text-gray-800 hover:text-gray-600">
+          <li>
+            <Link href="/AI-Analysis" className="block md:inline hover:text-gray-400">
               AI Analysis
             </Link>
           </li>
-          <li className="md:inline">
-            <Link href="/contact" className="block md:inline text-gray-800 hover:text-gray-600">
+          <li>
+            <Link href="/contact" className="block md:inline hover:text-gray-400">
               Contact
             </Link>
           </li>
