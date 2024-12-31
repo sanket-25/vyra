@@ -43,6 +43,13 @@
   font-style: normal;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Chonburi&display=swap');
+.chonburi-regular {
+  font-family: "Chonburi", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 
 @media (prefers-color-scheme: dark) {
   :root {
