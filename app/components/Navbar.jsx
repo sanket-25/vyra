@@ -2,20 +2,19 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { User } from 'lucide-react'; // Assuming you're using lucide-react for icons
+import { User } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Check login status when component mounts
     const loggedInStatus = localStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(loggedInStatus);
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-[#e4e4e4] text-gray-800 bg-white dark:bg-gray-900 dark:text-white px-4 py-6 border-b border-[#9e9e9e] z-50 navbar">
+    <nav className="fixed top-0 left-0 right-0 bg-[#ededed] text-gray-800 px-4 py-6 border-b border-[#9e9e9e] z-50 navbar">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="text-lg font-bold flex-shrink-0">
@@ -48,36 +47,34 @@ const Navbar = () => {
         </div>
 
         {/* Links */}
-        <ul
-          className={`absolute md:relative top-16 md:top-auto left-0 right-0 md:flex md:items-center md:space-x-4 bg-[#e4e4e4] md:bg-transparent p-4 md:p-0 z-40 transform ${isMenuOpen ? 'block' : 'hidden'} md:block`}
-        >
+        <ul className={`absolute md:relative top-16 md:top-auto left-0 right-0 md:flex md:items-center md:space-x-4 bg-[#ededed] md:bg-transparent p-4 md:p-0 z-40 transform ${isMenuOpen ? 'block' : 'hidden'} md:block`}>
           <li className="md:inline">
-            <Link href="/about" className="block md:inline dark:text-white text-gray-800 hover:text-gray-600">
+            <Link href="/about" className="block md:inline text-gray-800 hover:text-gray-600">
               About
             </Link>
           </li>
           <li className="md:inline">
-            <Link href="/Events" className="block md:inline dark:text-white text-gray-800 hover:text-gray-600">
+            <Link href="/Events" className="block md:inline text-gray-800 hover:text-gray-600">
               Events
             </Link>
           </li>
           <li className="md:inline">
-            <Link href="/Clubs" className="block md:inline dark:text-white text-gray-800 hover:text-gray-600">
+            <Link href="/Clubs" className="block md:inline text-gray-800 hover:text-gray-600">
               Clubs
             </Link>
           </li>
           <li className="md:inline">
-            <Link href="/AI-Coach" className="block md:inline dark:text-white text-gray-800 hover:text-gray-600">
+            <Link href="/AI-Coach" className="block md:inline text-gray-800 hover:text-gray-600">
               AI Coach
             </Link>
           </li>
           <li className="md:inline">
-            <Link href="/AI-Analysis" className="block md:inline dark:text-white text-gray-800 hover:text-gray-600">
+            <Link href="/AI-Analysis" className="block md:inline text-gray-800 hover:text-gray-600">
               AI Analysis
             </Link>
           </li>
           <li className="md:inline">
-            <Link href="/contact" className="block md:inline dark:text-white text-gray-800 hover:text-gray-600">
+            <Link href="/contact" className="block md:inline text-gray-800 hover:text-gray-600">
               Contact
             </Link>
           </li>
@@ -85,7 +82,6 @@ const Navbar = () => {
 
         {/* Toggle Button and Join Button */}
         <div className="flex items-center space-x-4">
-          {/* Conditional Rendering: Profile Icon or Join Button */}
           <div className="hidden md:block flex-shrink-0">
             {isLoggedIn ? (
               <Link href="/profile">
