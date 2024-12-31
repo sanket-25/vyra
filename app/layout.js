@@ -18,7 +18,7 @@ export const metadata = {
   title: "VYRA",
   description: "AI Based Training Analysis and Social Networking app for Athletes",
   icons: {
-    icon: "/logo.png", // Update this path with the correct image file for your favicon
+    icon: "/logo.png",
   },
 };
 
