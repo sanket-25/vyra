@@ -71,18 +71,13 @@ const Navbar = () => {
           } md:block`}
         >
           <li>
-            <Link href="/about" className="block md:inline hover:text-gray-400">
-              About
+            <Link href="/AI-Analysis" className="block md:inline hover:text-gray-400">
+              AI Analysis
             </Link>
           </li>
           <li>
-            <Link href="/Events" className="block md:inline hover:text-gray-400">
-              Events
-            </Link>
-          </li>
-          <li>
-            <Link href="/Clubs" className="block md:inline hover:text-gray-400">
-              Clubs
+            <Link href="/app" className="block md:inline hover:text-gray-400">
+              Social
             </Link>
           </li>
           <li>
@@ -91,13 +86,13 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link href="/AI-Analysis" className="block md:inline hover:text-gray-400">
-              AI Analysis
+            <Link href="/events" className="block md:inline hover:text-gray-400">
+              Events
             </Link>
           </li>
           <li>
-            <Link href="/contact" className="block md:inline hover:text-gray-400">
-              Contact
+            <Link href="/clubs" className="block md:inline hover:text-gray-400">
+              Clubs
             </Link>
           </li>
         </ul>
