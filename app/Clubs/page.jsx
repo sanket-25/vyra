@@ -8,7 +8,6 @@ const ListedClubsPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch the listed clubs from the API
     const fetchClubs = async () => {
       try {
         const response = await fetch('https://volt-backend.vercel.app/api/clubs/listed');
