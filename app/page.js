@@ -92,7 +92,7 @@ export default function Home() {
             textStroke: "1px #1a1a1a",
           }}
         >
-          <div className="font-claven ">V Y R A</div>
+          {/* <div className="font-claven ">V Y R A</div> */}
         </h1>
       </div>
 
