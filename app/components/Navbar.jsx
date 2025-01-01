@@ -29,7 +29,7 @@ const Navbar = () => {
 
   const handleSocialClick = (e) => {
     e.preventDefault();
-    window.location.href = 'https://thevyra.live';
+    window.location.href = 'https://vyra.live';
   };
 
   return (
