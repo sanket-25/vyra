@@ -27,6 +27,11 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleSocialClick = (e) => {
+    e.preventDefault();
+    window.location.href = 'https://thevyra.live'; // Replace with your desired URL
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 px-4 py-6 border-b z-50 navbar transition-colors duration-300 ${
@@ -76,9 +81,9 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link href="/app" className="block md:inline hover:text-gray-400">
+            <a href="#" onClick={handleSocialClick} className="block md:inline hover:text-gray-400">
               Social
-            </Link>
+            </a>
           </li>
           <li>
             <Link href="/AI-Coach" className="block md:inline hover:text-gray-400">
