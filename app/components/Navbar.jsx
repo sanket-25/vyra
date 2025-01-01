@@ -91,7 +91,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link href="/events" className="block md:inline hover:text-gray-400">
+            <Link href="/Events" className="block md:inline hover:text-gray-400">
               Events
             </Link>
           </li>
