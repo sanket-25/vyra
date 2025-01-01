@@ -29,7 +29,7 @@ const Navbar = () => {
 
   const handleSocialClick = (e) => {
     e.preventDefault();
-    window.location.href = 'https://thevyra.live'; // Replace with your desired URL
+    window.location.href = 'https://thevyra.live';
   };
 
   return (
@@ -47,7 +47,7 @@ const Navbar = () => {
         </div>
 
         {/* Hamburger Menu for Mobile */}
-        <div className="md:hidden flex-shrink-0 z-99">
+        <div className="md:hidden flex-shrink-0 ml-auto">
           <button
             className="hover:text-gray-400 focus:outline-none"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -103,29 +103,27 @@ const Navbar = () => {
         </ul>
 
         {/* Toggle Button and Join Button */}
-        <div className="flex items-center space-x-4">
-          <div className="hidden md:block flex-shrink-0">
-            {isLoggedIn ? (
-              <Link href="/profile">
-                <div className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
-                  <User size={24} />
-                </div>
-              </Link>
-            ) : (
-              <Link href="/join">
-                <button
-                  className="bg-red-600 text-black px-6 py-2 hover:bg-[#e4e4e4] hover:text-black hover:border-black border-2"
-                  style={{
-                    clipPath: 'polygon(10% 0%, 99% 0%, 100% 70%, 100% 70%, 90% 100%, 1% 100%, 0% 30%)',
-                    borderRadius: '5px',
-                    border: '1px solid red',
-                  }}
-                >
-                  Join Now
-                </button>
-              </Link>
-            )}
-          </div>
+        <div className="hidden md:flex items-center space-x-4 flex-shrink-0">
+          {isLoggedIn ? (
+            <Link href="/profile">
+              <div className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
+                <User size={24} />
+              </div>
+            </Link>
+          ) : (
+            <Link href="/join">
+              <button
+                className="bg-red-600 text-black px-6 py-2 hover:bg-[#e4e4e4] hover:text-black hover:border-black border-2"
+                style={{
+                  clipPath: 'polygon(10% 0%, 99% 0%, 100% 70%, 100% 70%, 90% 100%, 1% 100%, 0% 30%)',
+                  borderRadius: '5px',
+                  border: '1px solid red',
+                }}
+              >
+                Join Now
+              </button>
+            </Link>
+          )}
         </div>
       </div>
 
