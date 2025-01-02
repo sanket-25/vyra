@@ -8,10 +8,18 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [profileImg, setProfileImg] = useState('');
+  const [username, setUsername] = useState('');
 
   useEffect(() => {
+    // Get login status and profile info from localStorage
     const loggedInStatus = localStorage.getItem('isLoggedIn') === 'true';
+    const storedProfileImg = localStorage.getItem('profileImg');
+    const storedUsername = localStorage.getItem('username');
+    
     setIsLoggedIn(loggedInStatus);
+    setProfileImg(storedProfileImg || '');
+    setUsername(storedUsername || '');
   }, []);
 
   useEffect(() => {
@@ -40,19 +48,17 @@ const Navbar = () => {
           : 'bg-opacity-50 bg-[#ededed] text-gray-800 backdrop-blur-lg border-[#9e9e9e]'
       }`}
       style={{
-        backdropFilter: 'blur(10px)', // Apply blur effect behind the navbar
-        WebkitBackdropFilter: 'blur(10px)', // For Safari
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
       }}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo */}
         <div className="text-lg font-bold flex-shrink-0">
           <Link href="/" className="hover:text-gray-400">
             VYRA
           </Link>
         </div>
 
-        {/* Hamburger Menu for Mobile */}
         <div className="md:hidden flex-shrink-0 ml-auto">
           <button
             className="hover:text-gray-400 focus:outline-none"
@@ -75,7 +81,6 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Links */}
         <ul
           className={`absolute md:relative top-16 md:top-auto left-0 right-0 md:flex md:items-center md:space-x-4 bg-[#ededed] md:bg-transparent p-4 md:p-0 z-40 transform ${
             isMenuOpen ? 'block' : 'hidden'
@@ -108,12 +113,21 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* Toggle Button and Join Button */}
         <div className="hidden md:flex items-center space-x-4 flex-shrink-0">
           {isLoggedIn ? (
-            <Link href="/profile">
-              <div className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
-                <User size={24} />
+            <Link href={`/${username}`}>
+              <div className="flex items-center space-x-2">
+                {profileImg ? (
+                  <img
+                    src={profileImg}
+                    alt={username}
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
+                    <User size={24} />
+                  </div>
+                )}
               </div>
             </Link>
           ) : (
@@ -137,9 +151,18 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden mt-4">
           {isLoggedIn ? (
-            <Link href="/profile" className="block">
+            <Link href={`/${username}`} className="block">
               <div className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full flex items-center justify-center">
-                <User size={24} className="mr-2" /> Profile
+                {profileImg ? (
+                  <img
+                    src={profileImg}
+                    alt={username}
+                    className="w-8 h-8 rounded-full object-cover mr-2"
+                  />
+                ) : (
+                  <User size={24} className="mr-2" />
+                )}
+                {username || 'Profile'}
               </div>
             </Link>
           ) : (

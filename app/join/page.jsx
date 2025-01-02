@@ -19,7 +19,6 @@ const JoinPage = () => {
         try {
             const response = await sendOTP(contact);
             console.log(response.data);
-            // Save athlete ID to local storage when OTP is sent
             localStorage.setItem('athleteId', response.data.athlete_id);
             setStep(2);
         } catch (err) {
@@ -32,11 +31,11 @@ const JoinPage = () => {
             const response = await verifyOTP(contact, otp);
             console.log(response.data);
             if (response.data.isLogin) {
-                // If it's a login, set isLoggedIn to true
                 localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', response.data.username);
+                localStorage.setItem('profileImg', response.data.profile_img)
                 setStep(4);
             } else {
-                // If not a login, proceed to registration
                 setStep(3);
             }
         } catch (err) {
@@ -48,9 +47,8 @@ const JoinPage = () => {
         try {
             const response = await registerUser({ contact, ...userData });
             console.log(response.data);
-            // Set isLoggedIn to true after successful registration
             localStorage.setItem('isLoggedIn', 'true');
-            setStep(4); // Registration complete
+            setStep(4);
         } catch (err) {
             setError(err.response?.data?.error || 'An error occurred');
         }
