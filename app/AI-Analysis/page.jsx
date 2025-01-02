@@ -29,7 +29,7 @@ const AIAnalysis = () => {
     formData.append("sport_type", sportType);
 
     try {
-      const response = await fetch("http://13.49.67.6:5000/process-video", {
+      const response = await fetch("https://api.thevyra.live/process-video", {
         method: "POST",
         body: formData,
       });
@@ -127,13 +127,13 @@ const AIAnalysis = () => {
             </h3>
             <video
               controls
-              src={`http://13.49.67.6:5000/download/${outputData.output_video_url.split("/").pop()}`}
+              src={`https://api.thevyra.live/download/${outputData.output_video_url.split("/").pop()}`}
               className="w-full rounded-lg shadow-md"
               type="video/webm"
             />
           </div>
           <a
-            href={`http://13.49.67.6:5000${outputData.output_video_url}`}
+            href={`https://api.thevyra.live${outputData.output_video_url}`}
             download
             className="inline-block bg-green-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
           >
