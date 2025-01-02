@@ -49,7 +49,7 @@ const ListedClubsPage = () => {
             {/* Club Image */}
             {club.club_img && club.club_img.length > 0 ? (
               <Image
-                src={club.club_img[0]} // Display the first image of the club
+                src={club.club_img[0]}
                 alt={club.name}
                 width={300}
                 height={200}
