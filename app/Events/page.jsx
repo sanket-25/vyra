@@ -1,25 +1,30 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import { FaMapMarkerAlt, FaCalendarAlt, FaUsers } from 'react-icons/fa';
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { FaMapMarkerAlt, FaCalendarAlt, FaUsers, FaArrowRight ,FaLink,FaChevronUp,FaChevronDown} from "react-icons/fa";
 
 const Page = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isBoxVisible, setIsBoxVisible] = useState(false);
+  const [currentEventIndex, setCurrentEventIndex] = useState(0);
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('https://volt-backend.vercel.app/api/events');
+        const response = await fetch("https://volt-backend.vercel.app/api/events");
         if (!response.ok) {
-          throw new Error('Failed to fetch events');
+          throw new Error("Failed to fetch events");
         }
         const data = await response.json();
         const sortedEvents = data.sort((a, b) => new Date(a.event_date) - new Date(b.event_date));
         setEvents(sortedEvents);
+        if (sortedEvents.length > 0) {
+          setSelectedEvent(sortedEvents[0]);
+        }
       } catch (error) {
         console.error(error.message);
       } finally {
@@ -29,6 +34,20 @@ const Page = () => {
 
     fetchEvents();
   }, []);
+
+  const handlePreviousEvent = () => {
+    if (currentEventIndex > 0) {
+      setCurrentEventIndex(currentEventIndex - 1);
+      setSelectedEvent(events[currentEventIndex - 1]);
+    }
+  };
+
+  const handleNextEvent = () => {
+    if (currentEventIndex < events.length - 1) {
+      setCurrentEventIndex(currentEventIndex + 1);
+      setSelectedEvent(events[currentEventIndex + 1]);
+    }
+  };
 
   if (loading) {
     return (
@@ -53,15 +72,16 @@ const Page = () => {
         <h1 className="text-2xl md:text-3xl font-bold mt-24 text-black dark:text-white">Events</h1>
       </div>
 
+      {/* Event List */}
       <div className="relative p-4 md:p-6">
         <div className="relative border-l-2 border-dotted border-gray-400 dark:border-gray-600 ml-4 md:ml-6">
           {Object.entries(groupedEvents).map(([dateString, events]) => {
             const date = new Date(dateString);
-            const day = date.toLocaleDateString('en-US', { weekday: 'long' });
-            const formattedDate = date.toLocaleDateString('en-US', {
-              day: 'numeric',
-              month: 'short',
-              year: 'numeric',
+            const day = date.toLocaleDateString("en-US", { weekday: "long" });
+            const formattedDate = date.toLocaleDateString("en-US", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
             });
 
             return (
@@ -105,11 +125,11 @@ const Page = () => {
                         </p>
                         <div className="text-sm text-black dark:text-gray-400 mt-2 flex items-center">
                           <FaMapMarkerAlt className="mr-2" />
-                          {event.event_location?.address || 'TBD'}
+                          {event.event_location?.address || "TBD"}
                         </div>
                         <div className="text-sm text-black dark:text-gray-400 mt-2 flex items-center">
                           <FaCalendarAlt className="mr-2" />
-                          {event.event_date || 'TBD'}
+                          {event.event_date || "TBD"}
                         </div>
                         <div className="text-sm text-black dark:text-gray-400 mt-2 flex items-center">
                           <FaUsers className="mr-2" />
@@ -130,6 +150,7 @@ const Page = () => {
         </div>
       </div>
 
+      {/* Overlay for Event Details */}
       {isBoxVisible && (
         <div
           className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm z-40"
@@ -137,24 +158,60 @@ const Page = () => {
         ></div>
       )}
 
-      <div
-        className={`fixed top-0 right-0 h-full w-full md:w-1/2 bg-white mt-24 dark:bg-gray-900 shadow-lg z-50 p-4 md:p-6 transition-transform transform ${
-          isBoxVisible ? 'translate-x-0' : 'translate-x-full'
-        }`}
-        style={{
-          transition: 'transform 0.3s ease-in-out',
-        }}
-      >
-        <button
-          className="absolute top-4 left-4 text-lg font-bold text-gray-600 dark:text-gray-300"
-          onClick={() => setIsBoxVisible(false)}
+      {/* Event Details Sliding Box */}
+        <div
+          className={`fixed top-0 right-0 h-full w-full md:w-1/2 bg-white mt-24 dark:bg-gray-900 shadow-lg z-50 p-4 md:p-6 transition-transform transform ${
+            isBoxVisible ? "translate-x-0" : "translate-x-full"
+          }`}
+          style={{
+            transition: "transform 0.3s ease-in-out",
+          }}
         >
-          {'>>'}
-        </button>
+          {/* Navigation Buttons */}
+          <div className="flex items-center space-x-4">
+            <button
+              className="text-2xl px-2 py-1 rounded-lg hover:bg-white hover:text-black text-gray-600 dark:text-gray-300"
+              onClick={() => setIsBoxVisible(false)}
+            >
+              {"\u00BB"}
+            </button>
+            <Link
+              href="/eventspage"
+              className="px-4 py-2  text-sm ml-8 bg-gray-300 dark:bg-gray-700 text-black dark:text-white rounded-xl hover:bg-white hover:text-black flex items-center space-x-2 transition"
+            >
+              <span>Copy Link </span>
+              <FaLink className="transform rotate-[-45deg]" />
+            </Link>
+
+            <Link
+              href="/eventspage"
+              className="px-4 py-2 text-sm ml-8 bg-gray-300 dark:bg-gray-700 text-black dark:text-white rounded-xl hover:bg-white hover:text-black flex items-center space-x-2 transition"
+            >
+              <span>Event Page</span>
+              <FaArrowRight className="transform rotate-[-45deg]" />
+            </Link>
+            <button
+              className="text-lg ml-40 px-2 py-1  rounded-lg hover:bg-white hover:text-black font-bold text-gray-600 dark:text-gray-300"
+              onClick={handlePreviousEvent}
+            >
+              <FaChevronUp/>
+            </button>
+            <button
+              className="text-lg ml-64 px-2 py-1 rounded-lg hover:bg-white hover:text-black font-bold text-gray-600 dark:text-gray-300"
+              onClick={handleNextEvent}
+            >
+           
+              <FaChevronDown/>
+            </button>   
+          </div>
+        
+        <div className="border-b border-gray-300 dark:border-gray-700 mt-4"></div>
+
+        
 
         {selectedEvent && (
           <>
-            <div className="flex justify-center">
+            <div className="flex justify-center mt-4">
               {selectedEvent.photos && selectedEvent.photos.length > 0 ? (
                 <Image
                   src={selectedEvent.photos[0]}
