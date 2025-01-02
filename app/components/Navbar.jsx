@@ -34,9 +34,15 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 px-4 py-6 border-b z-50 navbar transition-colors duration-300 ${
-        isScrolled ? 'bg-gray-800 text-white border-gray-700' : 'bg-[#ededed] text-gray-800 border-[#9e9e9e]'
+      className={`fixed top-0 left-0 right-0 px-4 py-6 border-b z-50 navbar transition-all duration-300 ${
+        isScrolled
+          ? 'bg-opacity-70 bg-gray-800 text-white backdrop-blur-lg border-gray-700'
+          : 'bg-opacity-50 bg-[#ededed] text-gray-800 backdrop-blur-lg border-[#9e9e9e]'
       }`}
+      style={{
+        backdropFilter: 'blur(10px)', // Apply blur effect behind the navbar
+        WebkitBackdropFilter: 'blur(10px)', // For Safari
+      }}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
