@@ -66,7 +66,7 @@ const JoinPage = () => {
 
     return (
         <>
-            <div className="relative w-full min-h-screen dark:bg-gray-900 dark:text-white">
+            <div className="relative w-full min-h-screen">
                 {/* Grid Background with separate styles for light and dark themes */}
                 <div
                     className="absolute top-0 left-0 w-full h-full grid grid-cols-4 gap-0 min-h-screen"
