@@ -45,28 +45,27 @@ export default function Home() {
 
       {/* Text Overlay */}
       <div
-        className={`absolute inset-0 flex flex-row justify-start -mt-10 top-[20vh] ${isAnimating ? "opacity-100 transition-opacity duration-1000" : "opacity-0"
+        className={`absolute inset-0 flex flex-col md:flex-row justify-start -mt-10 top-[20vh] ${isAnimating ? "opacity-100 transition-opacity duration-1000" : "opacity-0"
           }`}
       >
-        <div className="w-full h-100">
+        <div className="w-full md:w-1/2 h-100">
           <h1
             className="text-[7vw] font-bold leading-none tracking-wider mt-8 ml-10 text-left text-black"
           >
-            <p className="chonburi-regular">
+            <p className="chonburi-regular font-900">
               EXPLORE THE RACE WITHIN YOU
             </p>
           </h1>
         </div>
-        <div>
-          <video
-            src="/videos/start2.mp4"
-            autoPlay
-            loop
-            muted
+        <div className="w-full md:w-1/2 h-100">
+          <img
+            src="/images/appDemo.png"
+            alt="Explore the Race"
             className=""
           />
         </div>
       </div>
+
 
       {/* Videos */}
       <div
@@ -94,7 +93,14 @@ export default function Home() {
         >
           <div className="font-claven ">V Y R A</div>
         </h1>
+
+
+    
       </div>
+
+
+
+
 
 
     </div>
