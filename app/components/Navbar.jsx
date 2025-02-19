@@ -22,18 +22,18 @@ const Navbar = () => {
     setUsername(storedUsername || '');
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (window.scrollY > 50) {
+  //       setIsScrolled(true);
+  //     } else {
+  //       setIsScrolled(false);
+  //     }
+  //   };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => window.removeEventListener('scroll', handleScroll);
+  // }, []);
 
   const handleSocialClick = (e) => {
     e.preventDefault();
@@ -43,9 +43,8 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 px-4 py-6 border-b z-50 navbar transition-all duration-300 ${
-        isScrolled
-          ? 'bg-opacity-70 bg-gray-800 text-white backdrop-blur-lg border-gray-700'
-          : 'bg-opacity-50 bg-[#ededed] text-gray-800 backdrop-blur-lg border-[#9e9e9e]'
+        'bg-opacity-70 text-white backdrop-blur-lg border-gray-700'
+ 
       }`}
       style={{
         backdropFilter: 'blur(10px)',
@@ -54,7 +53,7 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="text-lg font-bold flex-shrink-0">
-          <Link href="/" className="hover:text-gray-400">
+          <Link href="/" className="hover:text-gray-400 text-red-500">
             VYRA
           </Link>
         </div>
